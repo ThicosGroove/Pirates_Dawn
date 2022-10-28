@@ -54,7 +54,11 @@ public class PlayerInput : MonoBehaviour
             HandleShooting();
         }
 
-        PauseInput();
+        if (GameplayManager.Instance.currentGameState == GameStates.PLAYING
+            || GameplayManager.Instance.currentGameState == GameStates.PAUSED)
+        {
+            PauseInput();
+        }
     }
 
     private void HandleShooting()

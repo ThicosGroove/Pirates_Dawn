@@ -17,4 +17,9 @@ public class EnemyWeapon : MonoBehaviour
     {
         cannon.Shoot();
     } 
+
+    public void StopShooting()
+    {
+        cannon.StopShoot();
+    }
 }

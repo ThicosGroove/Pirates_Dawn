@@ -15,7 +15,6 @@ public abstract class EnemyBase : MonoBehaviour
 
     [Header("Manager Info")]
     [SerializeField] protected int damage = 1;
-    [SerializeField] int scoreValue = 10;
     [SerializeField] float timeToAutoDescrut = 2f;
 
     protected int playerLayer;

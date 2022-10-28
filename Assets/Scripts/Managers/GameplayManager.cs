@@ -12,7 +12,8 @@ public enum GameStates
     PREPLAY = 2,
     GAMEOVER = 3,
     MAIN_MENU = 4,
-    PLAYING = 5
+    OPTION_MENU = 5,
+    PLAYING = 6
 }
 
 // Manager que controla a gameplay e providencia alguns métodos utilitários.
@@ -68,6 +69,8 @@ public class GameplayManager : Singleton<GameplayManager>
                 PrePlay();
                 break;
             case GameStates.PLAYING:
+                break;
+            case GameStates.OPTION_MENU:
                 break;
             case GameStates.PAUSED:
                 break;

@@ -116,6 +116,7 @@ public abstract class HealthBase : MonoBehaviour, IDamageable
 
         spriteRenderer.sprite = sprite_Ship[Const.DEATH_SPRITE];
         Destroy(gameObject, .8f);
+        GameplayManager.Instance.UpdateGameState(GameStates.GAMEOVER);
     }
 
     private void OnCollisionEnter2D(Collision2D other)

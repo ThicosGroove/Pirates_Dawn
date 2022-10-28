@@ -28,15 +28,8 @@ public class BackGroundMusic : MonoBehaviour
         audioSource = GetComponent<AudioSource>();   
     }
 
-    private void Update()
-    {
-     
-      
-    }
-
     void PlayMusic()
     {
-        Debug.LogWarning("Chegou");
         if (GameplayManager.Instance.currentGameState == GameStates.MAIN_MENU
           || GameplayManager.Instance.currentGameState == GameStates.PREPLAY)
         {

@@ -64,4 +64,9 @@ public abstract class GunBase : MonoBehaviour
             firingCoroutine = null;
         }
     }
+
+    private void OnDisable()
+    {
+        StopFiring();
+    }
 }

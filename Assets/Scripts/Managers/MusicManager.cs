@@ -105,6 +105,4 @@ public class MusicManager : Singleton<MusicManager>
     {
         isSFX_Muted = !isSFX_Muted;
     }
-
-
 }

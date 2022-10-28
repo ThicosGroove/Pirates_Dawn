@@ -62,7 +62,7 @@ public class SpawnablesManager : MonoBehaviour
 
         transform.localPosition = new Vector3(newPlayer.transform.position.x, newPlayer.transform.position.y, 0);
 
-        if (enemyList.Count <= MaxEnemyAlive && SpawningEnemyCoroutine == null)
+        if (enemyList.Count <= MaxEnemyAlive || SpawningEnemyCoroutine == null)
         {
             ShouldSpawnEnemy();
         }

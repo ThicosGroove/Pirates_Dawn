@@ -3,8 +3,6 @@ using TMPro;
 using GameEvents;
 
 // Execution order maior do que o normal, para garantir que o script sera executado DEPOIS do player.
-//[DefaultExecutionOrder(9)]
-
 // Manager que controla todos os objetos de texto.
 [DefaultExecutionOrder(4)]
 public class UIManager : MonoBehaviour
@@ -65,8 +63,7 @@ public class UIManager : MonoBehaviour
 
     private void OnOptionsMenu()
     {
-        if (GameplayManager.Instance.currentGameState == GameStates.MAIN_MENU
-            || GameplayManager.Instance.currentGameState == GameStates.PAUSED)
+        if (GameplayManager.Instance.currentGameState == GameStates.OPTION_MENU)
         {
             ToggleAllMenuOff();
             optionsMenu.SetActive(true);
@@ -83,7 +80,11 @@ public class UIManager : MonoBehaviour
 
     private void OnGamePauseToggle()
     {
-        pauseMenu.SetActive(!pauseMenu.activeSelf);
+        if (GameplayManager.Instance.currentGameState != GameStates.PAUSED
+            || GameplayManager.Instance.currentGameState != GameStates.PLAYING)
+        {
+            pauseMenu.SetActive(!pauseMenu.activeSelf);
+        }
     }
 
     private void OnGameOver()
@@ -156,6 +157,7 @@ public class UIManager : MonoBehaviour
 
     public void PressOptions()
     {
+        GameplayManager.Instance.UpdateGameState(GameStates.OPTION_MENU);
         OnOptionsMenu();
     }
 
@@ -168,15 +170,15 @@ public class UIManager : MonoBehaviour
 
     public void pressBackToMenu()
     {
-        if (GameplayManager.Instance.currentGameState == GameStates.MAIN_MENU)
-        {
-            GoToMainMenu();
-        }
-        else if (GameplayManager.Instance.currentGameState == GameStates.PAUSED)
-        {
-            ToggleAllMenuOff();
-            pauseMenu.SetActive(true);
-        }
+        GameplayManager.Instance.UpdateGameState(GameStates.MAIN_MENU);
+        GoToMainMenu();
+    }
+
+    public void PressBackToPause()
+    {
+        GameplayManager.Instance.UpdateGameState(GameStates.PAUSED);
+        ToggleAllMenuOff();
+        pauseMenu.SetActive(true);
     }
 
     public void PressMenuGameOver()
@@ -186,13 +188,17 @@ public class UIManager : MonoBehaviour
         GoToMainMenu();
     }
 
-
     public void PressPlayAgain()
     {
         GameplayEvents.OnRestartGame();
         GameplayEvents.OnPrePlay();
         GameplayManager.Instance.UpdateGameState(GameStates.PREPLAY);
         OnPrePlay();
+    }
+
+    public void PressExitGame()
+    {
+        Application.Quit();
     }
 
     #endregion
