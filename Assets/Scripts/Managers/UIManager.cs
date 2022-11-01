@@ -9,7 +9,8 @@ public class UIManager : MonoBehaviour
 {
     [Header("All Menus On Scene")]
     [SerializeField] private GameObject mainMenu;
-    [SerializeField] private GameObject optionsMenu;
+    [SerializeField] private GameObject optionsMainMenu;
+    [SerializeField] private GameObject optionsPlaying;
     [SerializeField] private GameObject prePlayMenu;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject gameOverMenu;
@@ -61,12 +62,21 @@ public class UIManager : MonoBehaviour
         UpdateScoreUI();
     }
 
-    private void OnOptionsMenu()
+    private void OnOptionsMainMenu()
     {
         if (GameplayManager.Instance.currentGameState == GameStates.OPTION_MENU)
         {
             ToggleAllMenuOff();
-            optionsMenu.SetActive(true);
+            optionsMainMenu.SetActive(true);
+        }
+    }
+
+    private void OnOptionsPlaying()
+    {
+        if (GameplayManager.Instance.currentGameState == GameStates.OPTION_MENU)
+        {
+            ToggleAllMenuOff();
+            optionsPlaying.SetActive(true);
         }
     }
 
@@ -109,7 +119,8 @@ public class UIManager : MonoBehaviour
     {
         mainMenu.SetActive(false);
         ToggleGameplayUI(false);
-        optionsMenu.SetActive(false);
+        optionsMainMenu.SetActive(false);
+        optionsPlaying.SetActive(false);
         prePlayMenu.SetActive(false);
         pauseMenu.SetActive(false);
         gameOverMenu.SetActive(false);
@@ -155,10 +166,16 @@ public class UIManager : MonoBehaviour
         OnGameStart();
     }
 
-    public void PressOptions()
+    public void PressOptions_MainMenu()
     {
         GameplayManager.Instance.UpdateGameState(GameStates.OPTION_MENU);
-        OnOptionsMenu();
+        OnOptionsMainMenu();
+    }
+
+    public void PressOptions_Playing()
+    {
+        GameplayManager.Instance.UpdateGameState(GameStates.OPTION_MENU);
+        OnOptionsPlaying();
     }
 
     public void PressRestartOnPause()
